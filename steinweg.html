@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefan Steinweg — Olympiasieger &amp; Bahnradlegende</title>
+<meta name="description" content="Stefan Steinweg: Olympiasieger 1992, dreifacher Weltmeister im Bahnradsport. Heute zuhause im Pfälzer Wald.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1116;
+    --ink-soft:#161B22;
+    --ink-line: rgba(255,255,255,.08);
+    --wood:#EFE3C5;
+    --wood-soft:#F8F2DF;
+    --rust:#C8472B;
+    --steel:#3D6E97;
+    --brass:#C9A227;
+    --grey:#9CA3AF;
+    --text-dark:#1B1F27;
+    --text-dark-soft:#5B5547;
+    --maxw: 880px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--wood);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:.01em;
+    line-height:.95;
+    text-transform:uppercase;
+  }
+  :focus-visible{outline:2px solid var(--brass); outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    background:rgba(14,17,22,0);
+    border-bottom:1px solid transparent;
+    transition:background .3s ease, border-color .3s ease;
+  }
+  nav.solid{ background:rgba(14,17,22,.92); backdrop-filter:blur(8px); border-color:var(--ink-line);}
+  .brandmark{
+    font-family:'Anton', sans-serif;
+    font-size:1.05rem;
+    letter-spacing:.04em;
+    color:var(--wood);
+  }
+  .brandmark span{color:var(--brass);}
+  .navlinks{display:flex; gap:28px; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; font-weight:600;}
+  .navlinks a{color:var(--grey); transition:color .2s ease;}
+  .navlinks a:hover{color:var(--brass);}
+  .navlinks{display:none;}
+  @media(min-width:680px){ .navlinks{display:flex;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; align-items:flex-end;
+    padding:120px 0 64px;
+    overflow:hidden;
+  }
+  .hero-arcs{
+    position:absolute; top:50%; right:-18%; transform:translateY(-50%);
+    width:880px; height:880px; max-width:140vw;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:2; width:100%;}
+  .hero h1{
+    font-size:clamp(2.8rem, 9vw, 6.4rem);
+    color:var(--wood);
+    margin:10px 0 18px;
+  }
+  .hero h1 em{ font-style:normal; color:var(--rust);}
+  .hero p.lede{
+    max-width:480px;
+    font-size:1.05rem;
+    line-height:1.55;
+    color:#C9C2AE;
+    margin-bottom:30px;
+  }
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .btn{
+    font-family:'Space Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:13px 22px;
+    border-radius:2px;
+    display:inline-block;
+    border:1px solid var(--ink-line);
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--brass); color:var(--ink); border-color:var(--brass); font-weight:700;}
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-ghost{ color:var(--wood); }
+  .btn-ghost:hover{ border-color:var(--brass); color:var(--brass); }
+
+  /* ---------- RIBBON (signature curve) ---------- */
+  .ribbon{
+    position:relative;
+    background:var(--ink);
+    padding:10px 0 50px;
+  }
+  .ribbon-angle{
+    font-family:'Space Mono', monospace;
+    font-size:.7rem;
+    color:var(--steel);
+    text-align:center;
+    letter-spacing:.1em;
+    margin-bottom:-6px;
+  }
+  .ribbon svg{ width:100%; height:auto; display:block; }
+  .ribbon text{
+    font-family:'Space Mono', monospace;
+    font-size:15px;
+    letter-spacing:3px;
+    fill:var(--brass);
+    text-transform:uppercase;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:84px 0; position:relative; }
+  .section-dark{ background:var(--ink); color:var(--wood);}
+  .section-light{ background:var(--wood-soft); color:var(--text-dark);}
+  .kicker{ display:flex; align-items:baseline; gap:14px; margin-bottom:34px; }
+  .kicker .num{ font-family:'Space Mono',monospace; font-size:.78rem; color:var(--rust);}
+  .kicker h2{ font-size:clamp(1.7rem,4vw,2.4rem); }
+  .section-light .kicker .num{ color:var(--steel); }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ---------- ÜBER MICH ---------- */
+  .about-grid{ display:grid; grid-template-columns:1fr; gap:28px; }
+  @media(min-width:680px){ .about-grid{ grid-template-columns: 1.1fr .9fr; gap:48px; } }
+  .about-grid p{ line-height:1.7; color:#C9C2AE; margin-bottom:14px; font-size:1rem;}
+  .badge-list{ display:flex; flex-direction:column; gap:0; border-top:1px solid var(--ink-line); }
+  .badge-list div{
+    display:flex; justify-content:space-between; gap:16px;
+    padding:14px 0; border-bottom:1px solid var(--ink-line);
+    font-family:'Space Mono', monospace; font-size:.82rem;
+  }
+  .badge-list span:first-child{ color:var(--grey); }
+  .badge-list span:last-child{ color:var(--brass); font-weight:700; text-align:right;}
+
+  /* ---------- ERFOLGE (banked timeline) ---------- */
+  .timeline{ display:flex; flex-direction:column; }
+  .timeline .row{
+    display:grid;
+    grid-template-columns:84px 1fr;
+    gap:18px;
+    align-items:start;
+    padding:18px 0;
+    border-bottom:1px solid rgba(27,31,39,.1);
+  }
+  .timeline .row .yr{
+    font-family:'Space Mono', monospace; font-weight:700; font-size:.95rem;
+    color:var(--rust);
+    padding-top:3px;
+  }
+  .timeline .row h3{
+    font-family:'Inter', sans-serif; font-weight:800; text-transform:none;
+    font-size:1.08rem; letter-spacing:0; margin-bottom:3px; color:var(--text-dark);
+  }
+  .timeline .row p{ font-size:.92rem; color:var(--text-dark-soft); line-height:1.5; }
+
+  /* ---------- WERDEGANG ---------- */
+  .career{ display:flex; flex-direction:column; }
+  .career .row{
+    display:flex; gap:20px; padding:16px 0;
+    border-bottom:1px solid var(--ink-line);
+  }
+  .career .row .yr{
+    font-family:'Space Mono', monospace; color:var(--steel); font-weight:700;
+    min-width:84px; font-size:.92rem; padding-top:2px;
+  }
+  .career .row p{ color:#C9C2AE; line-height:1.55; font-size:.98rem;}
+  .career .row strong{ color:var(--wood); font-weight:700; }
+
+  /* ---------- HEUTE / MTB cards ---------- */
+  .card-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+  @media(min-width:680px){ .card-grid{ grid-template-columns:repeat(3,1fr); } }
+  .card{
+    background:#fff; border:1px solid rgba(27,31,39,.08);
+    padding:26px 22px; border-radius:3px;
+  }
+  .card .tag{ font-family:'Space Mono',monospace; font-size:.7rem; color:var(--steel); letter-spacing:.08em; text-transform:uppercase;}
+  .card h3{ font-family:'Inter'; text-transform:none; font-size:1.1rem; font-weight:800; margin:10px 0 8px; color:var(--text-dark);}
+  .card p{ font-size:.92rem; color:var(--text-dark-soft); line-height:1.55;}
+
+  /* ---------- KONTAKT / FOOTER ---------- */
+  .contact{ background:var(--ink); padding:90px 0 40px; }
+  .contact h2{ font-size:clamp(2rem,6vw,3.2rem); color:var(--wood); margin-bottom:16px;}
+  .contact p.lede{ color:#C9C2AE; max-width:460px; margin-bottom:30px; line-height:1.6;}
+  .contact-links{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:60px;}
+  footer{
+    border-top:1px solid var(--ink-line);
+    padding-top:22px;
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between;
+    font-family:'Space Mono', monospace; font-size:.75rem; color:var(--grey);
+  }
+  footer a{ color:var(--grey); }
+  footer a:hover{ color:var(--brass); }
+  footer .flinks{ display:flex; gap:18px; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="brandmark">STEFAN <span>STEINWEG</span></a>
+  <div class="navlinks">
+    <a href="#ueber">Über mich</a>
+    <a href="#erfolge">Erfolge</a>
+    <a href="#werdegang">Werdegang</a>
+    <a href="#heute">Heute</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-arcs" viewBox="0 0 400 400" aria-hidden="true">
+    <g fill="none" stroke-width="1.4">
+      <circle cx="200" cy="200" r="190" stroke="#3D6E97" opacity=".35"/>
+      <circle cx="200" cy="200" r="150" stroke="#C9A227" opacity=".4"/>
+      <circle cx="200" cy="200" r="112" stroke="#3D6E97" opacity=".3"/>
+      <circle cx="200" cy="200" r="76"  stroke="#C8472B" opacity=".35"/>
+    </g>
+  </svg>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Bahnrad · Olympia · Sechstagerennen</p>
+    <h1>Stefan<br><em>Steinweg</em></h1>
+    <p class="lede">Olympiasieger 1992. Dreifacher Weltmeister. Über zwei Jahrzehnte auf der Steilkurve der internationalen Bahnradwelt — heute zuhause im Pfälzer Wald.</p>
+    <div class="cta-row">
+      <a href="#kontakt" class="btn btn-primary">Auftritte &amp; Kontakt</a>
+      <a href="#erfolge" class="btn btn-ghost">Erfolge ansehen</a>
+    </div>
+  </div>
+</header>
+
+<div class="ribbon">
+  <p class="ribbon-angle">— 42° BANKING —</p>
+  <svg viewBox="0 0 1000 140" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+    <path id="curve" d="M -50 20 Q 500 220 1050 20" fill="none" stroke="none"/>
+    <text>
+      <textPath href="#curve" startOffset="50%" text-anchor="middle">
+        OLYMPIASIEGER 1992 — 3× WELTMEISTER — 10× DEUTSCHER MEISTER — 75 SECHSTAGERENNEN
+      </textPath>
+    </text>
+  </svg>
+</div>
+
+<section class="section-dark" id="ueber">
+  <div class="wrap">
+    <div class="kicker"><span class="num">01</span><h2>Wer ich bin</h2></div>
+    <div class="about-grid reveal">
+      <div>
+        <p>Ich bin Stefan Steinweg — ehemaliger Bahnradsportler mit einer Leidenschaft für Sechstagerennen. Mein Sport war die Mannschaftsverfolgung: vier Fahrer, eine Linie, 4000 Meter auf Zeit gegen eine andere Mannschaft.</p>
+        <p>1992 in Barcelona stand ich ganz oben auf dem Podest. Davor und danach folgten Weltmeistertitel, zehn Deutsche Meisterschaften und 75 Sechstagerennen quer durch Europa und die Welt.</p>
+        <p>Heute lebe ich in Wachenheim an der Weinstraße — und bin, statt auf der Bahn, lieber mit dem Mountainbike im Pfälzer Wald unterwegs.</p>
+      </div>
+      <div class="badge-list">
+        <div><span>Olympiasieger</span><span>Barcelona 1992</span></div>
+        <div><span>Weltmeistertitel</span><span>3×</span></div>
+        <div><span>Deutscher Meister</span><span>10×</span></div>
+        <div><span>Sechstagerennen</span><span>75 Starts</span></div>
+        <div><span>Auszeichnung</span><span>Bambi</span></div>
+        <div><span>Auszeichnung</span><span>Silbernes Lorbeerblatt</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-light" id="erfolge">
+  <div class="wrap">
+    <div class="kicker"><span class="num">02</span><h2>Erfolge</h2></div>
+    <div class="timeline reveal">
+      <div class="row">
+        <div class="yr">17</div>
+        <div><h3>Junioren-Weltmeister im Punktefahren</h3><p>Jüngster Titel meiner Karriere — der Auftakt zu allem, was folgte.</p></div>
+      </div>
+      <div class="row">
+        <div class="yr">1991</div>
+        <div><h3>Weltmeister, Mannschaftsverfolgung — Stuttgart</h3><p>Weltmeister mit dem Bahnvierer auf heimischer Bahn.</p></div>
+      </div>
+      <div class="row">
+        <div class="yr">1992</div>
+        <div><h3>Olympiasieger, Mannschaftsverfolgung 4000 m — Barcelona</h3><p>Der größte Erfolg meiner Laufbahn: Olympiagold mit der Mannschaft.</p></div>
+      </div>
+      <div class="row">
+        <div class="yr">2000</div>
+        <div><h3>Weltmeister, Zweier-Mannschaftsfahren — Manchester</h3><p>Madison-Weltmeistertitel gemeinsam mit Erik Weispfennig.</p></div>
+      </div>
+      <div class="row">
+        <div class="yr">—</div>
+        <div><h3>10× Weltcup-Sieger &amp; 10× Deutscher Meister</h3><p>Konstanz über eine ganze Karriere hinweg.</p></div>
+      </div>
+      <div class="row">
+        <div class="yr">75×</div>
+        <div><h3>Sechstagerennen, u. a. Sieg in Neukaledonien</h3><p>Hallen voller Publikum, Nächte auf der Bahn — meine liebste Disziplin.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark" id="werdegang">
+  <div class="wrap">
+    <div class="kicker"><span class="num">03</span><h2>Werdegang</h2></div>
+    <div class="career reveal">
+      <div class="row"><div class="yr">2007</div><p><strong>Team Singer</strong> — letzte aktive Jahre im Profiradsport.</p></div>
+      <div class="row"><div class="yr">2008</div><p><strong>Team Möbel Ehrmann</strong> — Karriereausklang im Mannschaftstrikot.</p></div>
+      <div class="row"><div class="yr">Danach</div><p>Wohnhaft in <strong>Deidesheim</strong>, Pächter einer Rebzeile im „Prominentenweinberg" der Lage Deidesheimer Paradiesgarten.</p></div>
+      <div class="row"><div class="yr">Heute</div><p>Zuhause in <strong>Wachenheim an der Weinstraße</strong> — mitten in der Pfalz, nah am Wald und am Wein.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-light" id="heute">
+  <div class="wrap">
+    <div class="kicker"><span class="num">04</span><h2>Heute</h2></div>
+    <div class="card-grid reveal">
+      <div class="card">
+        <p class="tag">Mountainbike</p>
+        <h3>Touren im Pfälzer Wald</h3>
+        <p>Geführte MTB-Touren durch eines der schönsten Mittelgebirge Deutschlands — organisiert und begleitet von mir.</p>
+      </div>
+      <div class="card">
+        <p class="tag">Wettkampf</p>
+        <h3>Höllenberg Trail-Trophy</h3>
+        <p>Auch heute noch am Start: MTB-Marathons in der Region, zuletzt bei der Trail-Trophy in Spirkelbach.</p>
+      </div>
+      <div class="card">
+        <p class="tag">Zuhause</p>
+        <h3>Wachenheim a. d. Weinstraße</h3>
+        <p>Pfälzer Wald, Weinberge und kurze Wege — die Bahn ist heute ein Trail.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="kicker"><span class="num">05</span></div>
+    <h2>Lust auf einen<br>Auftritt oder ein Gespräch?</h2>
+    <p class="lede">Für Vorträge, Talkrunden, Interviews oder einfach ein Gespräch über 30 Jahre Bahnradsport — ich freue mich auf Ihre Nachricht.</p>
+    <div class="contact-links">
+      <a href="mailto:kontakt@steini1.de" class="btn btn-primary">E-Mail schreiben</a>
+      <a href="#" class="btn btn-ghost">Termine</a>
+    </div>
+    <footer>
+      <span>© <span id="year"></span> Stefan Steinweg</span>
+      <div class="flinks">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('solid', window.scrollY > 40);
+  });
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced && 'IntersectionObserver' in window){
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
