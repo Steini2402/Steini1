@@ -141,6 +141,36 @@
   .navlinks{display:none;}
   @media(min-width:680px){ .navlinks{display:flex;} }
 
+  /* Hamburger button — mobile only */
+  .hamburger{
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    width:36px; height:36px; cursor:pointer; border:none; background:none;
+    padding:4px; border-radius:4px; z-index:60;
+  }
+  .hamburger span{
+    display:block; height:2px; background:#fff; border-radius:2px;
+    transition:transform .3s ease, opacity .3s ease;
+    box-shadow:0 1px 3px rgba(0,0,0,.6);
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  @media(min-width:680px){ .hamburger{display:none;} }
+
+  /* Mobile nav menu */
+  .mobile-menu{
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0; z-index:55;
+    background:rgba(14,17,22,.97); backdrop-filter:blur(8px);
+    flex-direction:column; align-items:center; justify-content:center; gap:32px;
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{
+    font-family:'Anton', sans-serif; font-size:2rem; letter-spacing:.05em;
+    text-transform:uppercase; color:var(--wood); text-decoration:none;
+    transition:color .2s ease;
+  }
+  .mobile-menu a:hover{ color:var(--brass); }
+
   /* ---------- HERO ---------- */
   .hero{
     position:relative;
@@ -388,7 +418,21 @@
     <a href="#charity">Charity</a>
     <a href="#kontakt">Kontakt</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile fullscreen menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation">
+  <a href="#ueber"     class="mobile-link">Über mich</a>
+  <a href="#erfolge"   class="mobile-link">Erfolge</a>
+  <a href="#werdegang" class="mobile-link">Werdegang</a>
+  <a href="#heute"     class="mobile-link">Heute</a>
+  <a href="#galerie"   class="mobile-link">Galerie</a>
+  <a href="#charity"   class="mobile-link">Charity</a>
+  <a href="#kontakt"   class="mobile-link">Kontakt</a>
+</div>
 
 <header class="hero" id="top">
   <div class="wrap hero-inner">
@@ -674,6 +718,21 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('solid', window.scrollY > 40);
   });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function toggleMenu(open){
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+  document.querySelectorAll('.mobile-link').forEach(a => {
+    a.addEventListener('click', () => toggleMenu(false));
+  });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') toggleMenu(false); });
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduced && 'IntersectionObserver' in window){
