@@ -714,6 +714,7 @@
 })();
 </script>
 
+<script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('solid', window.scrollY > 40);
@@ -724,11 +725,14 @@
   const mobileMenu = document.getElementById('mobile-menu');
   function toggleMenu(open){
     hamburger.classList.toggle('open', open);
-    mobileMenu.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', open);
+    mobileMenu.style.display = open ? 'flex' : 'none';
+    hamburger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  hamburger.addEventListener('click', () => toggleMenu(!mobileMenu.classList.contains('open')));
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.style.display === 'flex';
+    toggleMenu(!isOpen);
+  });
   document.querySelectorAll('.mobile-link').forEach(a => {
     a.addEventListener('click', () => toggleMenu(false));
   });
